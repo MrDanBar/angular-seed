@@ -7,9 +7,21 @@ export class Person {
     ) {}
 }
 
-const ironman = new Person("Daniel", "01057");
+export class Hero extends Person {
+    constructor(
+        public alterEgo: string,
+        public age: number,
+        name: string,
+        address: string
+    ) {
+        super(name, address);
+    }
+}
 
-console.log({ironman});
+const ironman = new Hero("IronMan", 39, "Daniel", "01057");
+const spiderMan = new Hero("SpiderMan", 18, "Peter", "01001");
+
+console.table({ironman, spiderMan});
 
 
 export {};
