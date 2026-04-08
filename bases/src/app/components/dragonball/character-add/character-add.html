@@ -1,0 +1,6 @@
+<h3>Add: {{ name() }} - {{ power() }}</h3>
+<input #txtName type="text" class="form-control" placeholder="Name" [value]="name()" (change)="name.set(txtName.value)"
+  (input)="name.set(txtName.value)" />
+<input #txtPower type="number" class="form-control mt-2" placeholder="Init power" [value]="power()"
+  (input)="power.set(txtPower.valueAsNumber)" />
+<button class="col-12 mt-2 btn btn-primary" (click)="addCharacter()">Create</button>

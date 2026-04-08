@@ -2,12 +2,6 @@ import { Component, signal } from "@angular/core";
 
 @Component({
   templateUrl: './counter.html',
-  styles: `
-    button {
-      background-color: #CC0000AA;
-      padding: 25px;
-    }
-  `
 })
 export class Counter {
   counter = 10;

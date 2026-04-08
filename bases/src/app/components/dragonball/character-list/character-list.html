@@ -1,0 +1,15 @@
+<h3>List</h3>
+<ul>
+  @for (item of characters(); track item.id; ) {
+  @if (item.power > 5000) {
+  <li>
+    <span>{{ item.name }} </span>
+    <strong
+      [class.text-danger]="item.power > 50000"
+      [class.text-primary]="item.power >= 15000">
+      ({{ item.power }})</strong>
+    <a> {{ item.id }}</a>
+  </li>
+  }
+  }
+</ul>
