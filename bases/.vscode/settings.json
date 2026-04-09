@@ -4,5 +4,17 @@
             "externalTemplate": true,
             "skipStyle": true
         }
-    }
+    },
+    "folder-color.pathColors": [
+        {
+            "folderPath": "bases\\src\\app\\components\\shared\\",
+            "color": "foldercolorizer.color_00cc00"
+        },
+        {
+            "folderPath": "bases\\src\\"
+        },
+        {
+            "folderPath": "bases\\src\\app\\components\\shared\\navbar\\navbar.css\\"
+        }
+    ]
 }

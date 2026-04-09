@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 import { Character } from '../interfaces/character-interface';
 
 @Injectable({
@@ -6,13 +6,19 @@ import { Character } from '../interfaces/character-interface';
 })
 export class Dragonball {
 
-  private defaultCharacters: Character[] = [
-    { id: '1', name: 'Goku', power: 15000 },
-  ]
+  characters = signal<Character[]>(this.loadFromLocalStorage());
 
-  public characters = signal<Character[]>(this.defaultCharacters);
+  loadFromLocalStorage(): Character[] {
+    const values = localStorage.getItem('dragonball-characters');
 
-  public addCharacter(character: Character) {
+    return values? JSON.parse(values) : [];
+  }
+
+  saveToLocalStorage = effect(() => {
+    localStorage.setItem('dragonball-characters', JSON.stringify(this.characters()));
+  });
+
+  addCharacter(character: Character) {
     this.characters.update(list => [...list, character]);
   }
 }
