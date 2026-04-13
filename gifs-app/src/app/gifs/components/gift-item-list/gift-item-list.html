@@ -1,0 +1,11 @@
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+  @for (items of list(); track items[0].id) {
+    <div class="grid gap-4">
+    @for (item of items; track item.id) {
+      <img class="h-full w-full rounded-lg object-cover"
+        [src]="item.url"
+        [alt]="item.title">
+    }
+    </div>
+  }
+</div>

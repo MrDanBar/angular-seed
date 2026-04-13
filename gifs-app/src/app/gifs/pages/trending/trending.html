@@ -1,0 +1,12 @@
+<section class="py-5">
+  <div class="h-screen overflow-y-scroll grid grid-cols-2 md:grid-cols-4 gap-4" (scroll)="onScroll($event)" #divTrending>
+    @for (items of gifService.trendingGroup(); track $index) {
+    <div class="grid gap-4">
+      @for (item of items; track item.id) {
+      <img class="h-full w-full rounded-lg object-cover" [src]="item.url" [alt]="item.title">
+      }
+    </div>
+    }
+  </div>
+
+</section>
