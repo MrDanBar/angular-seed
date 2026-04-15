@@ -1,9 +1,21 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
-  selector: 'app-search-input',
+  selector: 'country-search-input',
   imports: [],
   templateUrl: './search-input.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchInput { }
+export class SearchInput {
+
+  placeHolder = input.required<string>();
+  value = output<string>();
+
+  onSearch(text: string): void {
+    if (!text) {
+      return;
+    }
+
+    this.value.emit(text);
+  }
+}

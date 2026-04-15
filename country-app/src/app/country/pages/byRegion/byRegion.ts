@@ -1,9 +1,14 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ListDisplay } from "../../components/list-display/list-display";
+import { CountryService } from '../../services/countryService';
 
 @Component({
   selector: 'app-by-region',
-  imports: [],
+  imports: [ListDisplay],
   templateUrl: './byRegion.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ByRegion { }
+export class ByRegion {
+
+  countryService = inject(CountryService)
+}

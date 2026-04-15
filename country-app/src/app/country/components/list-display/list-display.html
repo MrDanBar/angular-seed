@@ -1,0 +1,49 @@
+<div class="overflow-x-auto w-full">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Bandera</th>
+        <th>Nombre</th>
+        <th>Capital</th>
+        <th>Icon</th>
+        <th>Población</th>
+        <th>Moneda</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of list(); track item.id) {
+      <tr>
+        <td>{{ item.id }}</td>
+        <td>
+          <div class="flex items-center gap-3">
+            <div class="avatar">
+              <div class="mask mask-squircle h-12 w-12">
+                <img [src]="item.flag_url" [alt]="item.name" />
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          {{ item.name }}
+        </td>
+        <td>
+          {{ item.capital }}
+        </td>
+        <td>
+          {{ item.icon }}
+        </td>
+        <td>
+          {{ item.population | number }}
+        </td>
+        <th>
+          <span class="badge badge-ghost badge-sm">{{ item.currency_symbol }}</span>
+          <button class="btn btn-ghost btn-xs">{{ item.currency_code }}</button>
+        </th>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

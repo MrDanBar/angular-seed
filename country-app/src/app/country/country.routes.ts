@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
 import { CountryLayout } from './layouts/CountryLayout/CountryLayout';
-import { ByCapital } from './components/byCapital/byCapital';
-import { ByRegion } from './components/byRegion/byRegion';
-import { ByCountry } from './components/byCountry/byCountry';
+import { ByCapital } from './pages/byCapital/byCapital';
+import { ByRegion } from './pages/byRegion/byRegion';
+import { ByCountry } from './pages/byCountry/byCountry';
+import { Country } from './pages/Country/Country';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,10 @@ export const routes: Routes = [
       {
         path: 'by-country',
         component: ByCountry,
+      },
+      {
+        path: 'by/:country-code',
+        component: Country,
       },
       {
         path: '**',
