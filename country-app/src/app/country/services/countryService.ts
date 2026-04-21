@@ -53,7 +53,6 @@ export class CountryService {
     const result = this.httpClient.get<CountryApiObject[]>(`${API_BASE_URL}/region/${pathParam}`)
       .pipe(
         map(CountryMapper.countryAppListToCountryList),
-        delay(500),
         catchError(error => {
           return throwError(
             () => new Error(`Unable to get region results for ${query}.`)

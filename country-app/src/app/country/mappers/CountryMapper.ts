@@ -18,7 +18,7 @@ export class CountryMapper {
       name: countryApi.name.common,
       icon: countryApi.flag,
       flag_url: countryApi.flags.svg,
-      capital: countryApi.capital[0] ?? 'Unavailable',
+      capital: countryApi.capital?.[0] ?? '-- Unavailable --',
       population: countryApi.population,
       currency_code: Object.values(countryApi.currencies)[0].name,
       currency_symbol: Object.values(countryApi.currencies)[0].symbol,
