@@ -7,4 +7,7 @@ export interface Country {
   currency_code: string;
   currency_symbol: string;
   population: number;
+  country_code: string;
+  region: string;
+  subregion: string;
 }

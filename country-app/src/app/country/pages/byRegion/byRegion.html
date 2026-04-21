@@ -1,1 +1,7 @@
-<country-list-display [list]="[]"/>
+<country-search-input placeHolder="Search by region.." (value)="query.set($event)" />
+
+@if (countryResource.error()?.message) {
+<app-error-tile [tile]="countryResource.error()?.message!" />
+} @else {
+<country-list-display [list]="countryResource.value()" [isLoading]="countryResource.isLoading()" />
+}

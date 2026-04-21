@@ -1,1 +1,26 @@
-<h1>{{ countryCode() }}</h1>
+<section class="m-6 mt-0 mb-2">
+  <div class="text-2xl">Details for: {{ countryCode() }}</div> {{ country()?.icon }}
+  - {{ country()?.name }}
+  - {{ country()?.region }}
+  - {{ country()?.subregion }}
+</section>
+
+@if (errorMessage()) {
+  <section class="content-center">
+    <app-error-tile [tile]="errorMessage()" />
+    <a (click)="goBack()" >Ups!</a>
+  </section>
+}
+
+@if (isLoading()) {
+  <span class="loading loading-bars loading-xl"></span>
+ }
+
+  <iframe
+  src="https://jsoncrack.com/widget"
+  width="100%"
+  height="600px"
+  style="border: none;"
+  #MyJsonFrame
+></iframe>
+

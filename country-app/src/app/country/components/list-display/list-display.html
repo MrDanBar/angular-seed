@@ -1,15 +1,16 @@
-<div class="overflow-x-auto w-full">
+<div class="mt-6 overflow-x-auto w-full">
   <table class="table">
     <!-- head -->
     <thead>
       <tr>
         <th>#</th>
-        <th>Bandera</th>
-        <th>Nombre</th>
+        <th>Flag</th>
+        <th>Name</th>
         <th>Capital</th>
         <th>Icon</th>
-        <th>Población</th>
-        <th>Moneda</th>
+        <th>Population</th>
+        <th>Currency</th>
+        <th>Details</th>
         <th></th>
       </tr>
     </thead>
@@ -40,8 +41,27 @@
         </td>
         <th>
           <span class="badge badge-ghost badge-sm">{{ item.currency_symbol }}</span>
-          <button class="btn btn-ghost btn-xs">{{ item.currency_code }}</button>
+          <button class="btn btn-ghost btn-xs cursor-text">{{ item.currency_code }}</button>
         </th>
+        <th>
+          <a [routerLink]="['/country/by/', item.country_code]" class="cursor-pointer hover:underline">Check {{ item.country_code }}</a>
+        </th>
+      </tr>
+      }
+
+      @if (isEmpty()) {
+      <tr>
+        <td colspan="8" class="text-center">
+          No hay datos
+        </td>
+      </tr>
+      }
+
+      @if (isLoading()) {
+      <tr>
+        <td colspan="8" class="text-center">
+          <span class="loading loading-bars loading-xl"></span>
+        </td>
       </tr>
       }
     </tbody>

@@ -22,6 +22,9 @@ export class CountryMapper {
       population: countryApi.population,
       currency_code: Object.values(countryApi.currencies)[0].name,
       currency_symbol: Object.values(countryApi.currencies)[0].symbol,
+      country_code: countryApi.cca3,
+      region: countryApi.region,
+      subregion: countryApi.subregion,
     }
   }
 }

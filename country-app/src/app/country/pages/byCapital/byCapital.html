@@ -1,3 +1,7 @@
-<country-search-input placeHolder="Search by capital.." (value)="onSearch($event)"/>
+<country-search-input placeHolder="Search by capital.." (value)="query.set($event)" />
 
-<country-list-display [list]="list()"/>
+@if (countryResource.error()?.message) {
+<app-error-tile [tile]="countryResource.error()?.message!" />
+} @else {
+<country-list-display [list]="countryResource.value()" [isLoading]="countryResource.isLoading()" />
+}
