@@ -1,5 +1,9 @@
-<country-search-input placeHolder="Search by region.." (value)="query.set($event)" />
-
+@for (region of regions; track region) {
+<button class="btn btn-outline mr-2 w-25" (click)="selectedRegion.set(region)"
+  [class.btn-primary]="selectedRegion() === region">
+  {{ region }}
+</button>
+}
 @if (countryResource.error()?.message) {
 <app-error-tile [tile]="countryResource.error()?.message!" />
 } @else {

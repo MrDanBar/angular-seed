@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { map, tap } from 'rxjs';
 import { ErrorTile } from "../../../shared/components/errorTile/errorTile";
 import { Country as ICountry } from '../../interfaces/Country';
+import { CountryMapper } from '../../mappers/CountryMapper';
 import { CountryService } from '../../services/countryService';
 
 @Component({
@@ -48,7 +49,7 @@ export class Country implements AfterViewInit {
           this.isLoading.set(false);
 
           if (result) {
-            this.country.set(result)
+            this.country.set(CountryMapper.countryApiToCountry(result))
           }
         },
         error: e => {

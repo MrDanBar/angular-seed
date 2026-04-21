@@ -70,7 +70,6 @@ export class CountryService {
     const result = this.httpClient.get<CountryApiObject[]>(`${API_BASE_URL}/alpha/${pathParam}`)
       .pipe(
         map(value => value.at(0)),
-        map(item => item? CountryMapper.countryApiToCountry(item) : null),
         catchError(error => {
           return throwError(
             () => new Error(`Unable to get country result for ${query}.`)

@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
+import { ErrorTile } from "../../../shared/components/errorTile/errorTile";
 import { ListDisplay } from "../../components/list-display/list-display";
+import { SearchInput } from "../../components/search-input/search-input";
+import { Region } from '../../interfaces/region.type';
 import { CountryService } from '../../services/countryService';
 import { Country } from '../Country/Country';
-import { SearchInput } from "../../components/search-input/search-input";
-import { ErrorTile } from "../../../shared/components/errorTile/errorTile";
 
 @Component({
   selector: 'app-by-region',
@@ -14,14 +15,17 @@ import { ErrorTile } from "../../../shared/components/errorTile/errorTile";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ByRegion {
+
+  public regions: Region[] = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
+
   countryService = inject(CountryService)
 
-  query = signal<string>('');
+  selectedRegion = signal<string | null>(null);
   list = signal<Country[]>([]);
 
   countryResource = rxResource({
     params: () => ({
-      query: this.query(),
+      query: this.selectedRegion(),
     }),
     stream: ({ params }) => {
       if (!params.query) {
