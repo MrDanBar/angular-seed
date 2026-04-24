@@ -1,0 +1,96 @@
+
+<h2>Reactivos: <small> Dinámicos </small></h2>
+<hr>
+
+<form autocomplete="off" [formGroup]="form">
+
+    <!-- Nombre -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input class="form-control"
+                   placeholder="Nombre de la persona"
+                   formControlName="name">
+            @if (!validator.isValidField(form, 'name')) {
+              <span class="form-text text-danger">
+                {{ validator.getErrorMessage(form, 'name') }}
+              </span>
+            }
+        </div>
+    </div>
+
+    <!-- Agregar Favorito -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+
+            <div class="input-group">
+                <input class="form-control"
+                       placeholder="Agregar favorito">
+
+
+                <button class="btn btn-outline-primary"
+                        type="button">
+                    Agregar favorito
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Lista de Juegos Favoritos -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9" formArrayName="favoriteGames">
+          @for (item of form.controls['favoriteGames'].value; track $index; let i = $index) {
+            <div class="mb-1">
+              <div class="input-group">
+                  <input class="form-control" [formControlName]="i">
+
+                  <button class="btn btn-outline-danger"
+                          type="button">
+                    Eliminar
+                </button>
+              </div>
+              @if (!validator.isValidFieldInArray(form, 'favoriteGames', i)){
+                <span class="form-text text-danger">
+                  {{ validator.getErrorMessageInArray(form, 'favoriteGames', i) }}
+                </span>
+              }
+          </div>
+          }
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="submit"
+                    class="btn btn-primary float-end"
+                    >
+                    <!-- [disabled]="myForm.invalid" -->
+                Guardar
+            </button>
+        </div>
+    </div>
+
+
+</form>
+
+
+
+<span>Valid</span>
+<pre>{{ form.valid| json }}</pre>
+<br>
+
+<span>Pristine</span>
+<pre>{{ form.pristine| json }}</pre>
+<br>
+
+<span>Value</span>
+<pre>{{ form.value| json }}</pre>
+<br>
+
+<span>Agregar Juego</span>
+<pre>{{ form.controls['name'].value | json }}</pre>
