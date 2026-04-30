@@ -26,14 +26,23 @@
 
             <div class="input-group">
                 <input class="form-control"
-                       placeholder="Agregar favorito">
-
+                       placeholder="Agregar favorito"
+                       [formControl]="newFavoriteGame"
+                       (keydown.enter)="addFavoriteToList()"
+                       (keydown.enter)="$event.preventDefault()"/>
 
                 <button class="btn btn-outline-primary"
-                        type="button">
+                        type="button"
+                        (click)="addFavoriteToList()"
+                        (click)="$event.preventDefault()">
                     Agregar favorito
                 </button>
             </div>
+            @if (!newFavoriteGame.pristine && newFavoriteGame.invalid && newFavoriteGame.touched){
+            <span class="form-text text-danger">
+              {{ validator.getErrorMessageOf(newFavoriteGame) }}
+            </span>
+            }
         </div>
     </div>
 
@@ -42,13 +51,14 @@
     <div class="mb-3 row">
         <label class="col-sm-3 col-form-label">Favoritos</label>
         <div class="col-sm-9" formArrayName="favoriteGames">
-          @for (item of form.controls['favoriteGames'].value; track $index; let i = $index) {
+          @for (item of getFavoriteGames().value; track $index; let i = $index) {
             <div class="mb-1">
               <div class="input-group">
                   <input class="form-control" [formControlName]="i">
 
                   <button class="btn btn-outline-danger"
-                          type="button">
+                          type="button"
+                          (click)="deleteFavoriteGame(i)">
                     Eliminar
                 </button>
               </div>
@@ -57,8 +67,14 @@
                   {{ validator.getErrorMessageInArray(form, 'favoriteGames', i) }}
                 </span>
               }
-          </div>
+            </div>
           }
+
+            @if (!validator.isValidField(form, 'favoriteGames')) {
+              <span class="form-text text-danger">
+                {{ validator.getErrorMessage(form, 'favoriteGames') }}
+              </span>
+            }
         </div>
     </div>
 
@@ -68,6 +84,7 @@
         <div class="col-sm-12">
             <button type="submit"
                     class="btn btn-primary float-end"
+                    (click)="onSave()"
                     >
                     <!-- [disabled]="myForm.invalid" -->
                 Guardar

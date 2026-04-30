@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormValidationUtils } from '../../../utils/FormValidationUtil';
 
 @Component({
@@ -29,4 +29,39 @@ export class Dynamic {
       ]
       , Validators.minLength(3))
   })
+
+  newFavoriteGame = new FormControl('', this.itemValidators);
+
+  getFavoriteGames() {
+    return this.form.controls['favoriteGames'] as FormArray
+  }
+
+  addFavoriteToList() {
+    if (this.newFavoriteGame.invalid) {
+      return
+    }
+
+    this.getFavoriteGames().push(this.formBuilder.control(this.newFavoriteGame.value, this.itemValidators))
+
+    this.newFavoriteGame.reset()
+  }
+
+  deleteFavoriteGame(index: number) {
+    this.getFavoriteGames().removeAt(index)
+  }
+
+  onSave() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    this.form.reset()
+
+    while (this.getFavoriteGames().controls.length > 0) {
+      this.deleteFavoriteGame(0)
+    }
+
+    this.newFavoriteGame.reset();
+  }
 }

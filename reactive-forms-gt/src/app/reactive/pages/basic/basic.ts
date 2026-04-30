@@ -37,7 +37,7 @@ export class Basic {
 
     this.myForm.reset({
       price: 0,
-      mane: '',
+      name: '',
       inStorage: 0
     });
   }

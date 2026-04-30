@@ -1,5 +1,12 @@
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+
 export class FormValidationUtils {
+
+  static fullName = '^[a-zA-Zñ]+( [a-zA-Zñ]+)+$';
+  static notOnlySpacesPattern = '^[a-zA-Z0-9]+$';
 
   static isValidField(form: FormGroup, fieldName: string): boolean {
     const field = form.controls[fieldName];
@@ -27,7 +34,7 @@ export class FormValidationUtils {
     return this.getErrorMessageOf(formControl)
   }
 
-  private static getErrorMessageOf(formControl: FormControl): string {
+  static getErrorMessageOf(formControl: FormControl): string {
     let errorMessage = '';
 
     Object.keys(formControl.errors!).forEach(element => {
@@ -41,9 +48,38 @@ export class FormValidationUtils {
         case 'minlength':
           errorMessage = `Min length is ${formControl.errors!['minlength'].requiredLength}`
           break
+        case 'usernameTaken':
+          errorMessage = 'User not available'
+          break
       }
     });
 
     return errorMessage;
+  }
+
+  static isField1EqualsToField2(field1: string, field2: string, reason: object) {
+    return (formGroup: AbstractControl) => {
+      const field1Value = formGroup.get(field1)?.value;
+      const field2Value = formGroup.get(field2)?.value;
+
+      return field1Value === field2Value ? null : { ...reason }
+    }
+  }
+
+
+  static async validateUserAvailability(control: AbstractControl): Promise<ValidationErrors | null> {
+      console.info('server validation')
+
+      await sleep(2500);
+
+      const inputValue = control.value;
+
+      if (inputValue.includes("danbar")) {
+        return {
+          usernameTaken: true
+        }
+      }
+
+      return null;
   }
 }
