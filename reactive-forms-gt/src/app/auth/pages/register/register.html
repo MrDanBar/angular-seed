@@ -48,7 +48,7 @@
                            placeholder="Nombre código del usuario"
                            formControlName="username">
                   @if (!validator.isValidField(form, 'username')) {
-                    <span class="form-text text-danger">
+                    <span class="form-text text-danger">-+
                     {{ validator.getErrorMessage(form, 'username') }}
                     </span>
                   }

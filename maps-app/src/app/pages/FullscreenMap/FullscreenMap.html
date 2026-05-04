@@ -1,0 +1,14 @@
+<div #map id="map"></div>
+
+<section id="controls" class="right-5 items-center">
+  <h2 class="text-2xl">{{ zoomValue() | number:'1.0-0'}}</h2>
+  <input type="range" min="0" max="19" [value]="zoomValue()" class="range range-info range-xl mr-7"
+    (input)="zoomValue.set(txtZoom.valueAsNumber)" #txtZoom />
+  <h2>Coordinates:</h2>
+  <pre class="text-gray-400 hover:text-red-500">{{
+      {
+        latitude: coordinates().lng | number:'1.4-4',
+        longitude: coordinates().lat | number:'1.4-4',
+      } | json
+    }}</pre>
+</section>
