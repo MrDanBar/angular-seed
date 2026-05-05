@@ -1,11 +1,9 @@
-import { AfterViewInit, Component, effect, ElementRef, signal, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, signal, viewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
-import { DecimalPipe, JsonPipe } from '@angular/common';
 import mapboxgl from 'mapbox-gl';
 import { uuidv7 } from 'uuidv7';
 import { Pin } from '../../interfaces/pin';
-import { list } from 'postcss';
 
 mapboxgl.accessToken = environment.mapBoxKey;
 
