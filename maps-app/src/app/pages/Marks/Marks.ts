@@ -4,17 +4,17 @@ import { environment } from '../../../environments/environment';
 import mapboxgl from 'mapbox-gl';
 import { uuidv7 } from 'uuidv7';
 import { Pin } from '../../interfaces/pin';
+import { MarkerPipe } from '../../pipes/MarkerPipe-pipe';
 
 mapboxgl.accessToken = environment.mapBoxKey;
 
 @Component({
   selector: 'app-marks',
-  imports: [],
+  imports: [MarkerPipe],
   templateUrl: './Marks.html',
   styles: `
     #map {
       width: 100vw;
-      height: calc(95vh - 100px);
     }
   `,
 })
@@ -65,7 +65,6 @@ export class Marks implements AfterViewInit {
       const nativePins = this.pinsElement()?.nativeElement;
       if (nativePins) {
         nativePins.scrollTop = nativePins.scrollHeight - nativePins.clientHeight + 64;
-        nativePins.focus();
       }
     });
 

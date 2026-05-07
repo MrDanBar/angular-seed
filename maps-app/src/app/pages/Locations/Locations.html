@@ -1,1 +1,39 @@
-<p>Locations works!</p>,
+<div>
+  <h1 class="text-4xl font-bold text-center mb-10">Target
+    <span class="text-4xl text-green-500">{{ target |date:'yyyy/MM/dd'}}</span>
+  </h1>
+</div>
+<div class="flex gap-5 w-full justify-center items-center border-green-900 border-2 rounded-lg p-10">
+  <div>
+    <span class="countdown font-mono text-4xl">
+      <span [style]="{
+        '--value': days()
+      }" aria-live="polite" [aria-label]="days()">{{ days() }}</span>
+    </span>
+    days
+  </div>
+  <div>
+    <span class="countdown font-mono text-4xl">
+      <span [style]="{
+        '--value': hours()
+      }" aria-live="polite" [aria-label]="hours()">{{ hours() }}</span>
+    </span>
+    hours
+  </div>
+  <div>
+    <span class="countdown font-mono text-4xl">
+      <span [style]="{
+        '--value': minutes()
+      }" aria-live="polite" [aria-label]="minutes()">{{ minutes() }}</span>
+    </span>
+    min
+  </div>
+  <div>
+    <span class="countdown font-mono text-4xl">
+      <span [style]="{
+        '--value': seconds()
+      }" aria-live="polite" [aria-label]="seconds()">{{ seconds() }}</span>
+    </span>
+    sec
+  </div>
+</div>
